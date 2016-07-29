@@ -5,7 +5,9 @@
 This is a *pro*ject *di*rectory *gen*erato*r* (`prodigenr`) that will
 create a project directory structure with template files necessary for
 managing and analyzing data for a variety of projects.  This allows
-for a standardized approach to having a modular research project.
+for a standardized approach to having a modular research project, while also
+taking advantage of existing well-developed and maintained infrastructures and
+processes (Rstudio and devtools).
 
 # How to install
 
@@ -22,19 +24,21 @@ The main function is the `prodigen` command.  So, for instance, if you
 want a manuscript project, type out:
 
     library(prodigenr)
-    prodigen(proj.name = 'cancerAndToxins',
-        proj.type = 'manuscript', proj.path = '/path/to/new/project')
+    prodigen(type = 'manuscript', name = 'cancerToxins',
+        path = '/path/to/new/project')
 
 This then creates a directory tree, with template files for starting
-your analysis!  The main secondary function is the `list_templates`
+your analysis!  The main secondary function is the `template_list`
 command, which lists the available template projects and files (submit
 a PR if you want another template included!):
 
-    list_templates('projects') ## Shows project templates
+    template_list
 
-For a more detailed tutorial, see the vignette (still in development):
+For a more detailed tutorial, see the vignette:
 
     vignette('introduction', 'prodigenr')
+    
+Or to directly [preview it here](https://htmlpreview.github.io/?https://github.com/lwjohnst86/prodigenr/blob/master/vignettes/introduction.html).
 
 # Related packages or projects
 

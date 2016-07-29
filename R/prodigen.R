@@ -1,97 +1,57 @@
-##' Create a project directory and associated files.
-##'
-##' The main workhorse of the \pkg{prodigenr} package.  Creates a
-##' project directory layout, with template files and helper scripts.
-##' @title Create a project directory based on a template
-##'
-##' @param proj.type type of project to create, based on the templates found in
-##'   \code{\link[prodigenr]{list_templates}} function
-##' @param proj.name name of the new project directory
-##' @param proj.path location of where the new project will be created
-##' @param git.init Logical, whether to initialize the new project with git
-##' @param packrat.init Logical, whether to track the R package usage with
-##'   packrat.
-##' @return Creates a project directory with files and subdirectories
-##' @export
-##' @author Luke W. Johnston
-##' @examples
-##'
-##' \dontrun{
-##' ## Get a list of possible project templates
-##' list_templates('projects')
-##' # Create a project. Best done in a fresh R console.
-##' prodigen('poster', 'poster', 'dev/', TRUE, FALSE)
-##' prodigen('poster', 'poster', 'path/to/dir/', FALSE)
-##' prodigen('poster', 'posterName', git.init = FALSE)
-##' prodigen('slides', 'conference-presentation', packrat.init = FALSE)
-##' prodigen('abstract', 'name', './', FALSE)
-##' prodigen('manuscript', proj.path = './', git.init = TRUE)
-##' }
-prodigen <- function(proj.type, proj.name = NULL, proj.path = getwd(),
-                     git.init = FALSE, packrat.init = FALSE) {
+#' Create a project directory based on a template.
+#'
+#'
+#' Create a project directory and associated files. Is based on using RStudio
+#' and the \link[devtools]{devtools} package development way of working with
+#' files and code. So commands/keybindings like
+#' \code{\link[devtools]{load_all}} (Ctrl-Shift-L) and
+#' \code{\link[devtools]{document}} (Ctrl-Shift-D) work to update your code and
+#' allow an continuous and integrated approach to analyzing your data and
+#' writing up your research product.
+#'
+#' @param type type of project to create, based on the templates found in
+#'   \code{\link[prodigenr]{template_list}} function
+#' @param name name of the new project directory
+#' @param path location of where the new project will be created
+#' @param git.init Logical, whether to initialize the new project with git
+#' @return Creates a project directory with files and subdirectories
+#' @export
+#' @examples
+#'
+#' \dontrun{\donttest{
+#' # Get a list of possible project templates
+#' template_list
+#' # Create a project. Best done in a fresh R console.
+#' prodigen('poster', 'poster', 'dev/', TRUE, FALSE)
+#' prodigen('poster', 'poster', 'path/to/dir/', FALSE)
+#' prodigen('poster', 'posterName', git.init = FALSE)
+#' prodigen('abstract', 'name', './', FALSE)
+#' prodigen('manuscript', path = './', git.init = TRUE)
+#' }}
+prodigen <-
+    function(type,
+             name = NULL,
+             path = getwd(),
+             git.init = FALSE) {
+        type <- match.arg(type, template_list)
+        stopifnot(is.character(name))
+        if (is.null(name)) {
+            name <- type
+        }
 
-    proj.type <- match.arg(proj.type, list_templates())
-    if (is.null(proj.name)) {
-        proj.name <- proj.type
-    } else if (!is.character(proj.name)) {
-        stop('Please use a character string (ie. in quotes) for the project name.')
+        proj_path <- file.path(path, name)
+        message("* Creating project '", name, "' in '", proj_path, "'.")
+        null <- utils::capture.output(suppressMessages(devtools::create(proj_path)))
+        include_readme(proj_path)
+        include_project_document(type, proj_path)
+        include_extra_analyses(proj_path)
+        include_rbase_files(proj_path)
+        suppressMessages(devtools::use_package('devtools', pkg = proj_path))
+        if (git.init) {
+            devtools::use_git(pkg = proj_path)
+        } else {
+            null <- file.remove(file.path(proj_path, '.gitignore'))
+        }
+        invisible(TRUE)
     }
 
-    if (!dir.exists(proj.path))
-        stop('Please use a proj.path that currently exists on your computer.')
-
-    proj_old <- file.path(proj.path, proj.type)
-    proj_new <- file.path(proj.path, proj.name)
-
-    if (file.exists(proj_new))
-        stop('Project already exists, please use a different proj.name.')
-
-    proj.files <- system.file('templates', 'projects', proj.type, package = 'prodigenr')
-    file.copy(proj.files,
-              proj.path, recursive = TRUE)
-    file.rename(proj_old, proj_new)
-
-    # Copy over the RStudio, Rprofile, and R/ files
-    template.files <- system.file('templates', 'files',
-                                  package = 'prodigenr')
-    template.files <- list.files(template.files, all.files = TRUE,
-                                 full.names = TRUE,
-                                 include.dirs = FALSE)[-1:-2]
-    file.copy(template.files,
-              file.path(proj_new), recursive = TRUE)
-
-    file.rename(file.path(proj_new, 'rstudio'),
-                file.path(proj_new, paste0(proj.name, '.Rproj')))
-
-    file.rename(file.path(proj_new, 'Rprofile'),
-                file.path(proj_new, '.Rprofile'))
-
-    file.append(file.path(proj_new, 'README.md'),
-                file.path(proj_new, 'README-append.md'))
-    file.remove(file.path(proj_new, 'README-append.md'))
-
-    if (git.init & requireNamespace('git2r', quietly = TRUE)) {
-        repo <- git2r::init(proj_new)
-        gitignore.file <- file.path(proj_new, '.gitignore')
-        if (!file.exists(gitignore.file))
-            file.create(gitignore.file, showWarnings = FALSE)
-        write('.RData\n.Rout\ndata/\n.Rhistory\n.Rproj.user',
-              file = gitignore.file, append = TRUE)
-    }
-
-    if (packrat.init & requireNamespace('packrat', quietly = TRUE)) {
-        packrat::init(
-            proj_new, enter = FALSE,
-            options = list(
-                vcs.ignore.lib = TRUE,
-                vcs.ignore.src = TRUE
-            )
-        )
-    }
-
-    if (git.init & requireNamespace('git2r', quietly = TRUE)) {
-        git2r::add(repo, unlist(git2r::status(repo, verbose = FALSE)))
-        git2r::commit(repo, 'Initial commit')
-    }
-
-}
