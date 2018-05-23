@@ -1,3 +1,27 @@
+# prodigenr 0.4.0
+
+## New feature
+
+* Use RMarkdown template files to draft the posters, slides, manuscripts, and 
+abstract (#70, #75). See `create_*` type commands.
+* New function to setup a general project, but excluding the individual document 
+types such manuscript, slides, etc (#72). `prodigen` function is deprecated.
+* READMEs in each folder and section to fill out in main README for the project
+description (#38, #80).
+
+## Removals
+
+* Moved `include_*()` functions over into [rostools](https://github.com/lwjohnst86/rostools) (#96)
+
+## Minor fixes
+
+* Added additional information to template README.md (#29, #30, #32)
+
+## Misc additions
+
+* Todo items to created README
+* Added code coverage #65
+
 # prodigenr 0.3.0
 
 ## New features/functionality
