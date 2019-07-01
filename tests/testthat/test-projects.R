@@ -12,11 +12,8 @@ test_that("the number of listed templates is correct", {
 test_that("project is set up", {
     skip_on_cran()
 
-    path <- tempdir()
-    capture_output(setup_project("testing", path = path))
-    proj_path <- file.path(path, "testing")
-    expect_true(dir.exists(proj_path))
+    expect_true(fs::dir_exists(new_project))
 
-    files_created <- fs::dir_ls(proj_path, recursive = TRUE)
+    files_created <- fs::dir_ls(new_project, recurse = TRUE)
     expect_equal(length(grep("/R/", files_created)), 3)
 })

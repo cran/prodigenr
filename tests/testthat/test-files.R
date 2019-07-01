@@ -1,29 +1,23 @@
 context("Creating files")
 
-quiet <- function(func) {
-    capture_output(func)
-}
-
 test_that("Manuscript, slides, posters, abstract created", {
     skip_on_cran()
 
-    path <- tempdir()
-    capture_output(setup_project("test.files", path = path))
+    withr::local_dir(new = new_project)
 
-    withr::local_dir(new = file.path(path, "test.files"))
+    quiet_test(create_manuscript())
+    quiet_test(create_poster())
+    quiet_test(create_slides())
+    quiet_test(create_abstract())
 
-    quiet(create_manuscript())
-    quiet(create_poster())
-    quiet(create_slides())
-    quiet(create_abstract())
-
-    withr::local_dir(new = file.path(path, "test.files", "doc"))
+    withr::local_dir(new = file.path(new_project, "doc"))
     expect_true(file.exists("manuscript.Rmd"))
     expect_true(file.exists("poster.Rmd"))
     expect_true(file.exists("slides.Rmd"))
     expect_true(file.exists("abstract.Rmd"))
 
     # Needs a Rproj file.
-    file.remove("../test.files.Rproj")
+    file.remove("../testing.Rproj")
+    file.remove("manuscript.Rmd")
     expect_error(create_manuscript())
 })

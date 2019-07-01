@@ -1,3 +1,28 @@
+# prodigenr 0.5.0
+
+## Major change
+
+- Switch to having only one argument for `setup_project()` called `path` (#102)
+
+## Additions
+
+- Can now use RStudio's "New Project" interface for a GUI creation of the project (#109, #111)
+- Setup projects to be "blank slates" (i.e. don't save `.RData`) (#105)
+- Add TODO list to project to complete after project creation (#39)
+
+## Hotfix
+
+- Fix NOTES in CRAN results check for unused dependencies (clipr, desc, devtools)
+
+## Misc
+
+- Remove deprecated `prodigen()` function (#107)
+- Replace current interactive messaging with `usethis::ui_*` functions
+- Reduced opinionated content and moved over to [rostools](https://github.com/rostools/rostools)
+and its [manifesto](https://gitlab.com/rostools/manifesto) (#108)
+- Removed some dependencies by using functions from usethis
+- Incorporate `use_template()` instead of custom function (#101)
+
 # prodigenr 0.4.0
 
 ## New feature
