@@ -1,3 +1,18 @@
+# prodigenr 0.6.0
+
+## Major changes
+
+- Removed abstract and poster templates. Abstracts are so small it isn't
+an important addition and (I sense) posters will for a while be created
+with other software tools (e.g. PowerPoint). Plus there aren't many 
+mature and well-established poster packages in R at this point in time.
+- Tidied up and trim down all the README files and include pointers to
+the prodigenr online documentation instead.
+- Removed R script template files. Projects might be too diverse for
+these template scripts to make sense.
+- Removed several dependencies, including the usethis package.
+- Moved Git initialization setup out into new function called `setup_with_git()`.
+
 # prodigenr 0.5.0
 
 ## Major change
@@ -36,7 +51,7 @@ description (#38, #80).
 
 ## Removals
 
-* Moved `include_*()` functions over into [rostools](https://github.com/lwjohnst86/rostools) (#96)
+* Moved `include_*()` functions over into [rostools](https://github.com/rostools/rostools) (#96)
 
 ## Minor fixes
 
@@ -54,7 +69,7 @@ description (#38, #80).
 * `prodigen()` now creates a new project structure that mimics R package development
 more, specifically `devtools` (since it is well documented and actively
 maintained) (#18, #15, #14). The old style has been removed.
-* Added a function to include a [STROBE](http://www.strobe-statement.org/index.php?id=strobe-home) 
+* Added a function to include a [STROBE](https://www.strobe-statement.org/index.php?id=strobe-home) 
 checklist for  reporting guidelines (#21).
 * Added function to include an `rfigshare` script to send to [figshare](https://figshare.com/) (#19).
 * Added function to include a more complete MIT license (#20).

@@ -6,7 +6,7 @@
 \alias{prodigenr-package}
 \title{prodigenr: Research Project Directory Generator}
 \description{
-\if{html}{\figure{logo.png}{options: align='right'}}
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
 Create a project directory structure, along with typical files
     for that project.  This allows projects to be quickly and easily created,
@@ -16,13 +16,14 @@ Create a project directory structure, along with typical files
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/lwjohnst86/prodigenr}
-  \item Report bugs at \url{https://github.com/lwjohnst86/prodigenr/issues}
+  \item \url{https://github.com/rostools/prodigenr}
+  \item \url{https://rostools.github.io/prodigenr/}
+  \item Report bugs at \url{https://github.com/rostools/prodigenr/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Luke Johnston \email{lwjohnst@gmail.com} (0000-0003-4169-2616)
+\strong{Maintainer}: Luke Johnston \email{lwjohnst@gmail.com} (\href{https://orcid.org/0000-0003-4169-2616}{ORCID})
 
 }
 \keyword{internal}

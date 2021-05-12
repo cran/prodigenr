@@ -7,17 +7,10 @@
 
 [![CRAN Status
 Badge](http://www.r-pkg.org/badges/version/prodigenr)](https://cran.r-project.org/package=prodigenr)
-[![Build
-Status](https://travis-ci.org/lwjohnst86/prodigenr.svg?branch=master)](https://travis-ci.org/lwjohnst86/prodigenr)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/lwjohnst86/prodigenr?branch=master&svg=true)](https://ci.appveyor.com/project/lwjohnst86/prodigenr)
-[![Coverage
-status](https://codecov.io/gh/lwjohnst86/prodigenr/branch/master/graph/badge.svg)](https://codecov.io/github/lwjohnst86/prodigenr?branch=master)
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![R-CMD-check](https://github.com/rostools/prodigenr/workflows/R-CMD-check/badge.svg)](https://github.com/rostools/prodigenr/actions)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![CRAN RStudio mirror
-downloads](http://cranlogs.r-pkg.org/badges/prodigenr)](http://www.r-pkg.org/pkg/prodigenr)
-[![Join the chat at
-https://gitter.im/prodigenr/Lobby](https://badges.gitter.im/lwjohnst86/prodigenr.svg)](https://gitter.im/prodigenr/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+downloads](http://cranlogs.r-pkg.org/badges/prodigenr)](https://www.r-pkg.org:443/pkg/prodigenr)
 <!-- badges: end -->
 
 This [R](https://cran.r-project.org) package is part of a
@@ -33,13 +26,13 @@ science.
 This specific package is a *pro*ject *di*rectory *gen*erato*r*
 (prodigenr). It will create a standardized project folder structure with
 the necessary template files for managing and analyzing data and for
-creating common scientific output (posters, slides, abstracts,
-manuscripts). Because of the standardized structure and because of the
-focus on a “one project, one scientific output”, this allows the final
-code and documents to be fairly modular, self-contained, easy to share
-and make public… and be as reproducible as possible. This folder
-structure also makes use of the existing and established applications
-and workflows ([RStudio](https://www.rstudio.com/),
+creating common scientific output (e.g. manuscripts). Because of the
+standardized structure and because of the focus on a “one project, one
+scientific output”, this allows the final code and documents to be
+fairly modular, self-contained, easy to share and make public… and be as
+reproducible as possible. This folder structure also makes use of the
+existing and established applications and workflows
+([RStudio](https://www.rstudio.com/),
 [devtools](https://CRAN.R-project.org/package=devtools), and
 [usethis](https://CRAN.R-project.org/package=usethis)). This package
 aims to make it easier to adhere to open scientific practices by
@@ -59,7 +52,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("lwjohnst86/prodigenr")
+remotes::install_github("rostools/prodigenr")
 ```
 
 ## Usage
@@ -76,8 +69,8 @@ setup_project("~/Desktop/DiseaseDiet")
 ```
 
 This then creates a directory tree, with template files for starting
-your analysis\! Open the newly created project via the `.Rproj` file.
-For the RStudio approach, go to “File -\> New Project”, then “New
+your analysis! Open the newly created project via the `.Rproj` file. For
+the RStudio approach, go to “File -&gt; New Project”, then “New
 directory” and find the prodigenr project in the list:
 
 ![Creating a prodigenr project in
@@ -90,16 +83,15 @@ using:
 create_manuscript() 
 # Or...
 create_poster()
-# etc.
 ```
 
 The main secondary function is the `template_list` command, which lists
 the available template files (submit a PR if you want another template
-included\!):
+included!):
 
 ``` r
 template_list
-#> [1] "abstract"   "manuscript" "poster"     "slides"
+#> [1] "report" "slides"
 ```
 
 <!-- TODO: Add gif for using RStudio "new file" -->
@@ -113,30 +105,31 @@ vignette('prodigenr', 'prodigenr')
 ## Related packages or projects
 
 There are several existing packages for creating projects, each of which
-has it’s own pros and cons. Try them out and see which you like\!
+has it’s own pros and cons. Try them out and see which you like!
 
-  - [ProjectTemplate](http://projecttemplate.net/)
-  - [makeProject](https://cran.r-project.org/package=makeProject)
-  - R package structure via
+-   [ProjectTemplate](http://projecttemplate.net/)
+-   [makeProject](https://cran.r-project.org/package=makeProject)
+-   R package structure via
     [devtools](https://CRAN.R-project.org/package=devtools), argued for
     in this
     [blog](https://rmflight.github.io/posts/2014/07/vignetteAnalysis.html)
-  - [rrtools](https://github.com/benmarwick/rrtools)
+-   [rrtools](https://github.com/benmarwick/rrtools)
 
 prodigenr tries to use ideas from R
 packages/[devtools](https://CRAN.R-project.org/package=devtools) while
 still being as simple as possible and to be more specific to academic
 researchers primarily in biomedical/non-computer science fields.
-However, it can always improve\! I welcome any suggestions, just submit
-a [GitHub issue](https://github.com/lwjohnst86/prodigenr/issues)\!
+However, it can always improve! I welcome any suggestions, just submit a
+[GitHub issue](https://github.com/rostools/prodigenr/issues)!
 
 ## Interested in contributing?
 
 See the [contributing
-documentation](http://prodigenr.lukewjohnston.com/CONTRIBUTING.html) for
-information on how to contribute. Please note that this project is
+documentation](https://rostools.github.io/prodigenr/CONTRIBUTING.html)
+for information on how to contribute. Please note that this project is
 released with a [Contributor Code of
-Conduct](http://prodigenr.lukewjohnston.com/CODE_OF_CONDUCT.html). By
+Conduct](https://rostools.github.io/prodigenr/CODE_OF_CONDUCT.html). By
 participating in this project you agree to abide by its terms.
 
-Special thanks to @zsemnani for creating the logo\!
+Special thanks to \[@zsemnani\](<https://twitter.com/zsemnani?lang=en>)
+for creating the logo!

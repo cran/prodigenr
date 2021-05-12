@@ -1,6 +1,6 @@
 
 rstudio_setup <- function(path, ...) {
     # create project
-    quiet(setup_project(path = path))
-    invisible()
+    setup_project(path = path)
+    invisible(NULL)
 }
