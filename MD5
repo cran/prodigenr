@@ -1,7 +1,7 @@
-b76d91837f1a497d8ebe96a71c2d8dfc *DESCRIPTION
+59e755acd271670f6ae532bcc3586317 *DESCRIPTION
 cf95d8fd569bd685d364a109b0127d68 *LICENSE
 f4bbaa2bb3cb058c915b2047cb13878e *NAMESPACE
-44b701b50fc5475b8082d2933196c0c2 *NEWS.md
+60c90502e8e1106d38ae46acccca572a *NEWS.md
 9f6d68dfa809248a5f803d750301f35f *R/create_doc.R
 e0ef681901465d24f47f9139cb2c086a *R/prodigenr-package.R
 8871540bc0c83a9af7d1f81742cb7002 *R/rstudio_setup.R
@@ -9,10 +9,10 @@ b01e303ec9ef8bf416091eb6084e18ed *R/setup_project.R
 527ec3e40fbc31bc7f751f5940731cd4 *R/usethis-utils.R
 e735a8121de3dc52baa7870a4b244bf0 *R/utils.R
 d40e1eff50d4c2a59e94e751c41e5665 *README.md
-221aad40f3013458e5a4a181f64429a0 *build/vignette.rds
+b55730dd5c6332e86d07f1984ef2abaa *build/vignette.rds
 6656c1ec95af3e057de76e18400b7aee *inst/doc/prodigenr.R
 50e23c96cb809431c33b7bfeecd21ab1 *inst/doc/prodigenr.Rmd
-1d60f25ff14d560f8e5a3b469c2ae4f4 *inst/doc/prodigenr.html
+e46ed835781f5c5241ceff196a8a7d4d *inst/doc/prodigenr.html
 e21c7a310cfe15f8285eddee3783ab0f *inst/rmarkdown/templates/report/skeleton/skeleton.Rmd
 dfadbff3ae3434fb8c80100dbc2968f9 *inst/rmarkdown/templates/report/template.yaml
 a3c2f6f14ad57f3cb5376eca45933873 *inst/rmarkdown/templates/slides/skeleton/skeleton.Rmd
@@ -21,7 +21,7 @@ d40d023aa9d6243208ac3afed87c51d3 *inst/rstudio/templates/project/rstudio_setup.d
 c731922414a786b8b353ab0055ea062f *inst/templates/R-README.md
 5dd66fca48d9413597da22935f87ca39 *inst/templates/TODO.md
 901fd4b78725e715fb84be57ca15e4f7 *inst/templates/base-README.md
-cb4230b40368d751d7cf91ca1a3d44bf *inst/templates/basic-description
+616ae42fe717c17bc70b110ed76b6284 *inst/templates/basic-description
 0aa37fe8359445088fa18abaaeac343c *inst/templates/data-README.md
 84faae9c1918d7c80dcb98c84e3181ba *inst/templates/data-raw-README.md
 74031a8bbe4968ef47df4cc09ad723f1 *inst/templates/doc-README.md

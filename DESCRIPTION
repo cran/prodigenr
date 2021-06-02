@@ -1,6 +1,6 @@
 Package: prodigenr
 Title: Research Project Directory Generator
-Version: 0.6.0
+Version: 0.6.1
 Authors@R: person("Luke", "Johnston", , "lwjohnst@gmail.com", c("aut", "cre"),
     comment = c(ORCID = "0000-0003-4169-2616"))
 Description: Create a project directory structure, along with typical files
@@ -18,8 +18,8 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2021-05-12 12:45:25 UTC; luke
+Packaged: 2021-06-02 10:09:31 UTC; luke
 Author: Luke Johnston [aut, cre] (<https://orcid.org/0000-0003-4169-2616>)
 Maintainer: Luke Johnston <lwjohnst@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-05-12 14:00:03 UTC
+Date/Publication: 2021-06-02 10:30:05 UTC
