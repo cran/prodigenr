@@ -20,48 +20,30 @@ setup_project <-
     function(path) {
         stopifnot(is.character(path))
         proj_path <- fs::path_abs(path)
+        proj_name <- fs::path_file(proj_path)
 
         if (grepl(" ", basename(proj_path))) {
             rlang::warn("Project name has a space in it, replacing with a dash (-).")
             proj_path <- path_remove_spaces(proj_path)
         }
 
-        fs::dir_create(proj_path)
+        if (fs::dir_exists(proj_path)) {
+            cli::cli_abort(c("The {.val {proj_path}} folder already exists, so project creation is canceled.",
+                         "i" = "Delete the folder or use another name (not {.val {proj_name}}) for your project."))
+        }
+        proj_template <- find_template("projects", "basic-analysis")
+        fs::dir_copy(proj_template, new_path = proj_path)
 
         withr::with_dir(
             new = proj_path,
             code = {
-                proj_name <- fs::path_file(proj_path)
-                add_rproj_file(proj_name)
-                add_description_file(proj_name)
-                create_directories()
-                include_readmes(proj_name)
-                use_template("TODO.md")
+                update_template("DESCRIPTION", data = list(ProjectName = proj_name))
+                update_template("template-Rproj", paste0(proj_name, ".Rproj"))
+                fs::file_delete("template-Rproj")
+                update_template("README.md", data = list(ProjectName = proj_name))
+                suppressMessages(create_report())
             })
     }
-
-create_directories <- function() {
-    fs::dir_create(c("R", "data", "doc", "data-raw"))
-}
-
-# File inclusion functions --------------------------------------
-
-add_description_file <- function(proj_name) {
-    use_template("basic-description", "DESCRIPTION",
-                 data = list(ProjectName = proj_name))
-}
-
-include_readmes <- function(proj_name) {
-    use_template(
-        "base-README.md",
-        "README.md",
-        data = list(ProjectName = proj_name)
-    )
-    use_template("doc-README.md", "doc/README.md")
-    use_template("data-README.md", "data/README.md")
-    use_template("data-raw-README.md", "data-raw/README.md")
-    use_template("R-README.md", "R/README.md")
-}
 
 # Git setup functions -------------------------------------------
 
@@ -78,12 +60,15 @@ include_readmes <- function(proj_name) {
 #'
 setup_with_git <- function() {
     if (!requireNamespace("gert", quietly = TRUE)) {
-        rlang::abort(c("This function relies on the gert package, please install it and then run the function again.",
-                       "install.packages('gert')"))
+        cli::cli_abort(
+            c("This function relies on the gert package, please install it and then run the function again.",
+              "i" = "Install with: {.code install.packages('gert')}")
+        )
     }
 
     if (!is_rproj_folder())
-        rlang::abort("The folder does not contain an `.Rproj` file. Please use this function while in the project created from `setup_project().`")
+        cli::cli_abort(c("The folder does not contain an {.val .Rproj} file.",
+                         "i" = "Please use this function while in the project created from {.code prodigenr::setup_project().}"))
 
     if (has_git()) {
         rlang::abort("The project already has Git added.")

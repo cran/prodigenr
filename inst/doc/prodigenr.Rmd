@@ -17,10 +17,9 @@ knitr::opts_chunk$set(
 ```
 
 prodigenr, or *pro*ject *di*rectory *gen*erator, was designed to simplify the process of
-creating new data analysis projects and to help make your workflow more
-reproducible from the beginning.
-Standard files and folders are created for specific projects (e.g. abstracts or
-manuscripts). While creating individual folders and files manually for new 
+creating new scientific data analysis projects and to help make your workflow more
+reproducible and open from the beginning.
+While creating individual folders and files manually for new 
 projects doesn't take too much time, over time and over many researchers, this
 can quickly add up to a lot of time! Plus, when a standard structure is followed
 it makes it easier to share code and establish reproducible practices earlier on
@@ -47,15 +46,13 @@ The resulting file structure should look something like this:
 prodigenr:::viz_project_tree(new_project_path)
 ```
 
-
-
 `README.md` files are contained within each project and in each folder that explains
 a bit more about what each folder and file are used for, which is briefly described
 here:
 
 - `R/`: Should contain the R scripts and functions used for the analysis.
-- `doc/`: Should contain the files related to presenting the project's
-scientific output (e.g. manuscript).
+- `doc/`: Should contain the files related to presenting the project's scientific
+output. Already has the report/manuscript inside.
 - `data/`: If relevant, is where the processed (or simulated) data is kept that
 is used for the project as well as the results of the project's analyses.
 - `data-raw/`: If relevant, is where the scripts that process the raw data into 
@@ -67,21 +64,19 @@ depends on.
 settings.
 
 To add a new document (e.g. slides, manuscript), run any of the `create_*()`
-commands (e.g. `create_manuscript()`) in the console while in RStudio in the
+commands (e.g. `create_slides()`) in the console while in RStudio in the
 newly created project (via the `.Rproj` file):
 
 ```{r example-create-function, eval=FALSE}
 # you need to run these in the project's console
-create_manuscript()
 create_slides()
 ```
 
-```{r poster-abstract-hide, echo=FALSE}
+```{r example-create-functions-hide, echo=FALSE}
 # you need to run these in the project's console
 withr::with_dir(
     new = new_project_path,
     code = {
-        create_manuscript()
         create_slides()
     }
 )
@@ -132,9 +127,13 @@ compared to `ProjectTemplate` in this
 - [`rrtools`](https://github.com/benmarwick/rrtools) is very similar to prodigenr, 
 except it focuses only on manuscripts. Is well thought out and the documentation
 is well written.
-- [`workflowr`](https://github.com/jdblischak/workflowr) is a workflow for creating
+- [`workflowr`](https://github.com/workflowr/workflowr) is a workflow for creating
 online, data science content.
 
 There is also a list of other similar projects 
 [on the rOpenSci GitHub repository](https://github.com/ropensci/rrrpkg#useful-tools-and-templates-for-making-research-compendia). 
 It's up to you to decide which style to use. 
+
+```{r remove-created-project, include=FALSE}
+fs::dir_delete(new_project_path)
+```

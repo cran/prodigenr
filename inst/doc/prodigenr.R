@@ -16,15 +16,13 @@ prodigenr:::viz_project_tree(new_project_path)
 
 ## ----example-create-function, eval=FALSE--------------------------------------
 #  # you need to run these in the project's console
-#  create_manuscript()
 #  create_slides()
 
-## ----poster-abstract-hide, echo=FALSE-----------------------------------------
+## ----example-create-functions-hide, echo=FALSE--------------------------------
 # you need to run these in the project's console
 withr::with_dir(
     new = new_project_path,
     code = {
-        create_manuscript()
         create_slides()
     }
 )
@@ -34,4 +32,7 @@ withr::with_dir(fs::path_temp(), {fs::dir_tree(basename(new_project_path))})
 
 ## ----templates----------------------------------------------------------------
 template_list
+
+## ----remove-created-project, include=FALSE------------------------------------
+fs::dir_delete(new_project_path)
 

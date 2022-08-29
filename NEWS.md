@@ -1,3 +1,16 @@
+# prodigenr 0.6.2
+
+## Minor changes and CRAN fixes
+
+- Removed Distill from imports and from created report, switching to using Quarto
+instead (e.g. with YAML metadata).
+- Removed AppVeyor.
+- Rearranged project creation to copy an internal folder (with necessary files)
+into the specified folder on the users computer. This hopefully will make it easier
+to add other templates later on.
+- Updated package aims to be clearer and more focused.
+- Fixes to CRAN notes about HTML5.
+
 # prodigenr 0.6.1
 
 ## Bug fix
@@ -75,7 +88,7 @@ description (#38, #80).
 * `prodigen()` now creates a new project structure that mimics R package development
 more, specifically `devtools` (since it is well documented and actively
 maintained) (#18, #15, #14). The old style has been removed.
-* Added a function to include a [STROBE](https://www.strobe-statement.org/index.php?id=strobe-home) 
+* Added a function to include a [STROBE](https://www.strobe-statement.org/) 
 checklist for  reporting guidelines (#21).
 * Added function to include an `rfigshare` script to send to [figshare](https://figshare.com/) (#19).
 * Added function to include a more complete MIT license (#20).
