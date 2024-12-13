@@ -1,60 +1,56 @@
-
-#' Create a basic R Markdown document from a template.
+#' Create a basic Quarto document from a template.
 #'
-#' Creates manuscript/report or slide R Markdown file and saves it into
-#' the `doc/` folder.
+#' Creates manuscript/report or slide Quarto file and saves it into
+#' the `docs/` folder.
 #'
 #' @param type The file type (e.g. report, slides).
 #'
-#' @return A created `.Rmd` file in the `doc/` folder.
+#' @return A created `.qmd` file in the `docs/` folder.
 #'
 #' @examples
 #' \dontrun{
-#' create_manuscript()
 #' create_report()
 #' create_slides()
 #' }
 create_doc <- function(type = c("report", "slides")) {
-    if (!is_rproj_folder())
-        rlang::abort("The folder does not contain an `.Rproj` file. Please use this function while in the project created from `setup_project().`")
+  if (!is_rproj_folder()) {
+    cli::cli_abort(c(
+      "The folder does not contain an {.val .Rproj} file.",
+      "i" = "Use while in a project made with {.fn prodigenr::setup_project}."
+    ))
+  }
 
-    if (!dir.exists("doc"))
-        rlang::abort("What happened to your `doc/` folder?")
+  if (!dir.exists("docs")) {
+    cli::cli_abort("We can't find a {.path docs/} folder, but need it.")
+  }
 
-    type <- match.arg(type)
-    file_name <- normalizePath(file.path("doc", paste0(type, ".Rmd")), mustWork = FALSE)
-    template_file <- fs::path_package("prodigenr", "rmarkdown", "templates", type)
-    if (fs::file_exists(file_name)) {
-        rlang::abort(paste0("The file '", type, ".Rmd' already exists in the doc folder."))
-    } else {
-        rmarkdown::draft(
-            file = file_name,
-            template = template_file,
-            package = NULL,
-            create_dir = FALSE,
-            edit = FALSE
-        )
-        cli::cli_alert_success("Creating a {.val {type}} file in the {.val {'doc/'}} folder.")
-    }
-    invisible()
+  type <- rlang::arg_match(type)
+  type <- fs::path_ext_set(type, "qmd")
+  file_name <- normalizePath(file.path("docs", paste0(type)), mustWork = FALSE)
+  template_file <- fs::path_package("prodigenr", "templates", "documents", type)
+  if (fs::file_exists(file_name)) {
+    cli::cli_abort("The file {.file docs/{type}} already exists.")
+  } else {
+    fs::file_copy(
+      path = template_file,
+      new_path = file_name
+    )
+    cli::cli_alert_success("Created the {.file docs/{type}}!")
+  }
+  invisible()
 }
 
-#' @describeIn create_doc Creates a report R Markdown document in the `doc/` folder.
+#' @describeIn create_doc Creates a report Quarto document in the `docs/` folder.
 #' @export
 create_report <- function() {
-    create_doc(type = "report")
-    return(invisible())
+  create_doc(type = "report")
+  return(invisible())
 }
 
-#' @describeIn create_doc Creates a manuscript R Markdown document in
-#'   the `doc/` folder. Is the same as [create_report()].
-#' @export
-create_manuscript <- create_report
-
-#' @describeIn create_doc Creates a R Markdown document for making slides in the `doc/` folder.
+#' @describeIn create_doc Creates a Quarto document for making slides in the `docs/` folder.
 #' @export
 create_slides <- function() {
-    create_doc(type = "slides")
+  create_doc(type = "slides")
 }
 
 #' List project templates within \pkg{prodigenr}.

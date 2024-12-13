@@ -1,4 +1,4 @@
-## ---- echo = FALSE------------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -15,20 +15,22 @@ setup_project(new_project_path)
 prodigenr:::viz_project_tree(new_project_path)
 
 ## ----example-create-function, eval=FALSE--------------------------------------
-#  # you need to run these in the project's console
-#  create_slides()
+# # you need to run these in the project's console
+# create_slides()
 
 ## ----example-create-functions-hide, echo=FALSE--------------------------------
 # you need to run these in the project's console
 withr::with_dir(
-    new = new_project_path,
-    code = {
-        create_slides()
-    }
+  new = new_project_path,
+  code = {
+    create_slides()
+  }
 )
 
 ## ----file-structure-with-doc, echo=FALSE, results="markup", comment=""--------
-withr::with_dir(fs::path_temp(), {fs::dir_tree(basename(new_project_path))})
+withr::with_dir(fs::path_temp(), {
+  fs::dir_tree(basename(new_project_path))
+})
 
 ## ----templates----------------------------------------------------------------
 template_list

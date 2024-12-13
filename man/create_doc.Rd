@@ -3,15 +3,12 @@
 \name{create_doc}
 \alias{create_doc}
 \alias{create_report}
-\alias{create_manuscript}
 \alias{create_slides}
-\title{Create a basic R Markdown document from a template.}
+\title{Create a basic Quarto document from a template.}
 \usage{
 create_doc(type = c("report", "slides"))
 
 create_report()
-
-create_manuscript()
 
 create_slides()
 }
@@ -19,25 +16,21 @@ create_slides()
 \item{type}{The file type (e.g. report, slides).}
 }
 \value{
-A created \code{.Rmd} file in the \verb{doc/} folder.
+A created \code{.qmd} file in the \verb{docs/} folder.
 }
 \description{
-Creates manuscript/report or slide R Markdown file and saves it into
-the \verb{doc/} folder.
+Creates manuscript/report or slide Quarto file and saves it into
+the \verb{docs/} folder.
 }
 \section{Functions}{
 \itemize{
-\item \code{create_report()}: Creates a report R Markdown document in the \verb{doc/} folder.
+\item \code{create_report()}: Creates a report Quarto document in the \verb{docs/} folder.
 
-\item \code{create_manuscript()}: Creates a manuscript R Markdown document in
-the \verb{doc/} folder. Is the same as \code{\link[=create_report]{create_report()}}.
-
-\item \code{create_slides()}: Creates a R Markdown document for making slides in the \verb{doc/} folder.
+\item \code{create_slides()}: Creates a Quarto document for making slides in the \verb{docs/} folder.
 
 }}
 \examples{
 \dontrun{
-create_manuscript()
 create_report()
 create_slides()
 }
